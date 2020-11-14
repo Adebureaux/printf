@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility_csdiu.c                                    :+:      :+:    :+:   */
+/*   utility_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 17:25:32 by adeburea          #+#    #+#             */
-/*   Updated: 2020/10/28 17:57:18 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/11/10 20:33:44 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
+int				ft_putchar(char c)
 {
 	write(1, &c, 1);
 	return (1);
 }
 
-int	ft_putstr(char *s)
+int				ft_putstr(char *s)
 {
 	int i;
 
@@ -31,7 +31,7 @@ int	ft_putstr(char *s)
 	return (i);
 }
 
-int	ft_putnbr_size(int n)
+int				ft_putnbr_size(int n)
 {
 	int size;
 
@@ -46,7 +46,7 @@ int	ft_putnbr_size(int n)
 	return (size);
 }
 
-int	ft_putnbr(int n)
+int				ft_putnbr(int n)
 {
 	int		count;
 	int		size;

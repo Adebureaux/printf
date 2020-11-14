@@ -5,8 +5,8 @@ NAME = libftprintf.a
 CFLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 SRCS =			srcs/ft_printf.c \
-				srcs/utility_csdiu.c \
-				srcs/utility_piu.c
+				srcs/utility_1.c \
+				srcs/utility_2.c
 OBJS = 			${SRCS:.c=.o}
 
 .c.o:

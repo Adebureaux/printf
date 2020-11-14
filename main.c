@@ -2,11 +2,10 @@
 
 int		main(void)
 {
-	unsigned int i = 133;
+	int i;
+	i = 290;
 
-	ft_printf("mine = %d\n", ft_printf("Hi|%x\n", i));
-	ft_printf("real = %d\n", printf("Hi|%i\n", i));
-	// printf("real one : |%s|slt|%d||%c|slt|%d|\n", c, 1, c[1], 1);
-	// ft_printf("my one   : |%s|slt|%d||%c|slt|%d|\n", c, 1, c[1], 1);
+	ft_printf("mine = %d\n", ft_printf("Hi|%u|%i|%x|%i\n", -1, -1, 42, 42));
+	ft_printf("real = %d\n", printf("Hi|%u|%i|%x|%i\n", -1, -1, 42, 42));
 	return (0);
 }
