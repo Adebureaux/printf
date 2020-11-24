@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:58:26 by adeburea          #+#    #+#             */
-/*   Updated: 2020/11/14 19:24:09 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/11/24 19:27:30 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,25 @@
 # include <stdarg.h>
 # include <stdio.h>
 
-typedef struct s_spec	t_spec;
-struct			s_spec
+typedef struct s_ptf	t_ptf;
+struct			s_ptf
 {
 	char	*conv;
 	char	*flag;
+	int		(*ptr[6])();
+	int		(*c)(char);
+	int		(*s)(char*);
+	int		(*p)(void*);
+	int		(*d)(int);
+	int		(*u)(unsigned int);
+	int		(*x)(unsigned int);
 };
 int				ft_printf(const char *str, ...);
-int				ft_putaddress(void *ptr);
-int				ft_putchar(char c);
-int				ft_putstr(char *s);
-int				ft_putnbr(int n);
-unsigned int	ft_putnbr_u(unsigned int n);
-int				ft_puthex(unsigned int nb);
+int				display_c(int c);
+int				display_s(char *s);
+int				display_p(void *ptr);
+int				display_d(int n);
+int				display_u(unsigned int n);
+int				display_x(unsigned int nb);
 
 #endif

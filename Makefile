@@ -2,10 +2,11 @@
 
 CC = gcc
 NAME = libftprintf.a
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 LIBFT = libft/libft.a
 SRCS =			srcs/ft_printf.c \
-				srcs/utility_1.c \
+				srcs/display_csp.c \
+				srcs/utility_dux.c \
 				srcs/utility_2.c
 OBJS = 			${SRCS:.c=.o}
 
@@ -22,7 +23,8 @@ ${LIBFT}:
 all: ${NAME}
 
 out: ${LIBFT}
-	${CC} ${LIBFT} ${CFLAGS} main.c ${SRCS}
+	${CC} -g -fsanitize=address ${LIBFT} ${CFLAGS} main.c ${SRCS}
+	rm -rf a.out.dSYM
 	./a.out
 
 clean:

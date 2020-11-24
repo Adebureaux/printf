@@ -6,19 +6,22 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 17:25:32 by adeburea          #+#    #+#             */
-/*   Updated: 2020/11/10 20:33:44 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/11/24 19:25:04 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int				ft_putchar(char c)
+int				display_c(int n)
 {
-	write(1, &c, 1);
+	unsigned char c;
+
+	c = (unsigned char)n;
+	write(1, &n, 1);
 	return (1);
 }
 
-int				ft_putstr(char *s)
+int				display_s(char *s)
 {
 	int i;
 
@@ -31,7 +34,7 @@ int				ft_putstr(char *s)
 	return (i);
 }
 
-int				ft_putnbr_size(int n)
+int				display_d_size(int n)
 {
 	int size;
 
@@ -46,7 +49,7 @@ int				ft_putnbr_size(int n)
 	return (size);
 }
 
-int				ft_putnbr(int n)
+int				display_d(int n)
 {
 	int		count;
 	int		size;
@@ -57,7 +60,7 @@ int				ft_putnbr(int n)
 		n *= -1;
 		count += ft_putchar('-');
 	}
-	size = ft_putnbr_size(n);
+	size = display_d_size(n);
 	while (size >= 10)
 	{
 		count += ft_putchar(n / size + '0');

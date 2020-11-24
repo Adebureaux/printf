@@ -6,13 +6,13 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 03:33:07 by adeburea          #+#    #+#             */
-/*   Updated: 2020/11/10 20:34:14 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/11/24 19:26:43 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int				ft_putnbr_size_u(unsigned int n)
+int				display_u_size(unsigned int n)
 {
 	int size;
 
@@ -27,7 +27,7 @@ int				ft_putnbr_size_u(unsigned int n)
 	return (size);
 }
 
-unsigned int	ft_putnbr_u(unsigned int n)
+int				display_u(unsigned int n)
 {
 	int		count;
 	int		size;
@@ -38,7 +38,7 @@ unsigned int	ft_putnbr_u(unsigned int n)
 		n *= -1;
 		count += ft_putchar('-');
 	}
-	size = ft_putnbr_size_u(n);
+	size = display_u_size(n);
 	while (size >= 10)
 	{
 		count += ft_putchar(n / size + '0');
@@ -49,7 +49,7 @@ unsigned int	ft_putnbr_u(unsigned int n)
 	return (count);
 }
 
-int		ft_puthex(unsigned int nb)
+int		display_x(unsigned int nb)
 {
 	int		count;
 	char	conv_nb;
@@ -69,7 +69,7 @@ int		ft_puthex(unsigned int nb)
 	return (count);
 }
 
-char	ft_hex(int n)
+char	display_p_hex(int n)
 {
 	if (n >= 0 && n < 10)
 		return ('0' + n);
@@ -77,7 +77,7 @@ char	ft_hex(int n)
 		return ('a' + n - 10);
 }
 
-int		ft_putaddress(void *ptr)
+int		display_p(void *ptr)
 {
 	int			count;
 	int			i;
@@ -91,7 +91,7 @@ int		ft_putaddress(void *ptr)
 	i = (sizeof(p) << 3) - 20;
 	while (i >= 0)
 	{
-		count += ft_putchar(ft_hex((p >> i) & 0xf));
+		count += ft_putchar(display_p_hex((p >> i) & 0xf));
 		i -= 4;
 	}
 	return (count);
