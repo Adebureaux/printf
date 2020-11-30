@@ -1,40 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility_1.c                                        :+:      :+:    :+:   */
+/*   display_u.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/21 17:25:32 by adeburea          #+#    #+#             */
-/*   Updated: 2020/11/24 19:25:04 by adeburea         ###   ########.fr       */
+/*   Created: 2020/11/29 16:14:58 by adeburea          #+#    #+#             */
+/*   Updated: 2020/11/29 16:15:30 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
-int				display_c(int n)
-{
-	unsigned char c;
-
-	c = (unsigned char)n;
-	write(1, &n, 1);
-	return (1);
-}
-
-int				display_s(char *s)
-{
-	int i;
-
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar(s[i]);
-		i++;
-	}
-	return (i);
-}
-
-int				display_d_size(int n)
+int				u_size(unsigned int n)
 {
 	int size;
 
@@ -49,7 +27,7 @@ int				display_d_size(int n)
 	return (size);
 }
 
-int				display_d(int n)
+int				display_u(unsigned int n)
 {
 	int		count;
 	int		size;
@@ -60,7 +38,7 @@ int				display_d(int n)
 		n *= -1;
 		count += ft_putchar('-');
 	}
-	size = display_d_size(n);
+	size = u_size(n);
 	while (size >= 10)
 	{
 		count += ft_putchar(n / size + '0');

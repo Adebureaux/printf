@@ -1,48 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_utility.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/21 17:40:36 by adeburea          #+#    #+#             */
-/*   Updated: 2020/11/30 02:10:49 by adeburea         ###   ########.fr       */
+/*   Created: 2020/11/29 15:53:40 by adeburea          #+#    #+#             */
+/*   Updated: 2020/11/29 17:14:37 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		parse_str(va_list vl, t_ptf ptf, char *str)
+int	ft_putchar(int c)
 {
-	ptf.prec = 0;
-	(void)str;
-	display_c(ptf, va_arg(vl, int));
+	write(1, &c, 1);
 	return (1);
 }
 
-t_ptf	init_ptf(void)
+int	ft_putstr(char *str)
 {
-	t_ptf	ptf;
+	int i;
+	int count;
 
-	ptf.ret = 0;
-	return (ptf);
+	i = 0;
+	count = 0;
+	while (str[i])
+		count += ft_putchar(str[i++]);
+	return (count);
 }
 
-int		ft_printf(const char *str, ...)
+int	display_percent(void)
 {
-	va_list	vl;
-	t_ptf	ptf;
-
-	va_start(vl, str);
-	ptf = init_ptf();
-	while (*str)
-	{
-		if (*str == '%' && *str + 1)
-			ptf.ret += parse_str(vl, ptf, (char*)++str);
-		else
-			ptf.ret += ft_putchar(*str);
-		str++;
-	}
-	va_end(vl);
-	return (ptf.ret);
+	return (ft_putchar('%'));
 }
