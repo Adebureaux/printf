@@ -10,9 +10,10 @@ SRCS =			srcs/ft_printf.c \
 				srcs/display_c.c \
 				srcs/display_s.c \
 				srcs/display_p.c \
-				srcs/display_di.c \
+				srcs/display_d.c \
 				srcs/display_u.c \
-				srcs/display_xX.c
+				srcs/display_x.c \
+				srcs/display_ptf.c
 OBJS = 			${SRCS:.c=.o}
 
 .c.o:

@@ -1,36 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_xX.c                                       :+:      :+:    :+:   */
+/*   display_d.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 16:12:29 by adeburea          #+#    #+#             */
-/*   Updated: 2020/11/29 16:27:51 by adeburea         ###   ########.fr       */
+/*   Created: 2020/11/29 16:10:17 by adeburea          #+#    #+#             */
+/*   Updated: 2020/12/01 22:46:27 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		display_x(unsigned int nb, int alpha)
+int		d_size(int n)
 {
-	int		count;
-	char	conv_nb;
-	char	base[17];
+	int size;
 
-	if (alpha)
-		ft_strlcpy(base, "0123456789ABCDEF", 17);
-	else
-		ft_strlcpy(base, "0123456789abcdef", 17);
-	count = 0;
-	if (nb < 0)
+	size = 1;
+	if (!n)
+		return (0);
+	while (n >= 10)
 	{
-		nb *= -1;
-		count += ft_putchar('-');
+		size *= 10;
+		n /= 10;
 	}
-	if (nb >= 16)
-		count += display_x((int)(nb / 16), alpha);
-	conv_nb = base[nb % 16];
-	count += ft_putchar(conv_nb);
-	return (count);
+	return (size);
+}
+
+void	display_d(t_ptf *ptf)
+{
+	int		size;
+	int		n;
+
+	n = va_arg(ptf->vl, int);
+	if (n < 0)
+	{
+		n *= -1;
+		ptf->ret += ft_putchar('-');
+	}
+	size = d_size(n);
+	while (size >= 10)
+	{
+		ptf->ret += ft_putchar(n / size + '0');
+		n %= size;
+		size /= 10;
+	}
+	ptf->ret += ft_putchar(n % 10 + '0');
 }

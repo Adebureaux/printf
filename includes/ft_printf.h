@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:58:26 by adeburea          #+#    #+#             */
-/*   Updated: 2020/11/29 17:33:21 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/01 23:09:47 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,25 @@ struct			s_ptf
 {
 	int		ret;
 	int		padding;
+	int		align;
 	int		width;
 	int		prec;
-	char	conv;
+	char	pad;
+	char	type;
+	char	spec[10];
+	char	flag[5];
+	va_list	vl;
 };
 int				ft_printf(const char *str, ...);
 int				ft_putchar(int c);
 int				ft_putstr(char *str);
-void			display_c(t_ptf ptf, int c);
-void			display_s(t_ptf ptf, char *s);
-int				display_p(void *ptr);
-int				display_d(int n);
-int				display_u(unsigned int n);
-int				display_x(unsigned int nb, int alpha);
-int				display_percent(void);
+int				int_len(int n, int flag);
+void			display_c(t_ptf *ptf);
+void			display_s(t_ptf *ptf);
+void			display_p(t_ptf *ptf);
+void			display_d(t_ptf *ptf);
+void			display_u(t_ptf *ptf);
+void			display_x(t_ptf *ptf, unsigned int nb);
+void			display_ptf(t_ptf *ptf);
 
 #endif

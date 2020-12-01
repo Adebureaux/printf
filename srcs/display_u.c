@@ -6,13 +6,13 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:14:58 by adeburea          #+#    #+#             */
-/*   Updated: 2020/11/29 16:15:30 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/01 23:01:38 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int				u_size(unsigned int n)
+int		u_size(unsigned int n)
 {
 	int size;
 
@@ -27,24 +27,23 @@ int				u_size(unsigned int n)
 	return (size);
 }
 
-int				display_u(unsigned int n)
+void	display_u(t_ptf *ptf)
 {
-	int		count;
-	int		size;
+	int				size;
+	unsigned int	n;
 
-	count = 0;
+	n = va_arg(ptf->vl, unsigned);
 	if (n < 0)
 	{
 		n *= -1;
-		count += ft_putchar('-');
+		ptf->ret += ft_putchar('-');
 	}
 	size = u_size(n);
 	while (size >= 10)
 	{
-		count += ft_putchar(n / size + '0');
+		ptf->ret += ft_putchar(n / size + '0');
 		n %= size;
 		size /= 10;
 	}
-	count += ft_putchar(n % 10 + '0');
-	return (count);
+	ptf->ret += ft_putchar(n % 10 + '0');
 }

@@ -6,43 +6,92 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 17:40:36 by adeburea          #+#    #+#             */
-/*   Updated: 2020/11/30 02:10:49 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/01 23:13:31 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		parse_str(va_list vl, t_ptf ptf, char *str)
+void	display_type(t_ptf *ptf)
 {
-	ptf.prec = 0;
-	(void)str;
-	display_c(ptf, va_arg(vl, int));
-	return (1);
+	if (ft_strchr(ptf->spec, ptf->type))
+	{
+			if (ptf->type == 'c')
+				display_c(ptf);
+			if (ptf->type == 'c')
+				display_s(ptf);
+			if (ptf->type == 'p')
+				display_p(ptf);
+			if (ptf->type == 'd' || ptf->type == 'i')
+				display_d(ptf);
+			if (ptf->type == 'u')
+				display_u(ptf);
+			if (ptf->type == 'x' || ptf->type == 'X')
+				display_x(ptf, va_arg(ptf->vl, unsigned));
+			if (ptf->type == '%')
+				ptf->ret += ft_putchar('%');
+	}
 }
 
-t_ptf	init_ptf(void)
+char	*parse_spec(t_ptf *ptf, char *str)
 {
-	t_ptf	ptf;
+	int		i;
 
-	ptf.ret = 0;
+	i = 0;
+	if (str[i] == '0')
+		i += int_len((ptf->pad = '0'), 0);
+	if (ft_isdigit(str[i]))
+		i += int_len((ptf->padding = ft_atoi(&str[i])), 1);
+	if (str[i] == '-')
+		i += int_len((ptf->align = 1), 0);
+	if (str[i] == '*')
+		i += int_len((ptf->width = va_arg(ptf->vl, int)), 1);
+	 else if (ft_isdigit(str[i]))
+		i += int_len((ptf->width = ft_atoi(&str[i])), 1);
+	if (str[i] == '.')
+	{
+		if (str[i++] == '*')
+			i += int_len((ptf->prec = va_arg(ptf->vl, int)), 1);
+		else if (ft_isdigit(str[i]))
+			i += int_len((ptf->prec = ft_atoi(&str[i])), 1);
+	}
+	ptf->type = ft_strchr(ptf->spec, str[i])[0];
+	//display_ptf(ptf);
+	display_type(ptf);
+	return (&str[i]);
+}
+
+t_ptf	*init_ptf(void)
+{
+	t_ptf	*ptf;
+
+	ptf = (t_ptf*)malloc(sizeof(t_ptf));
+	ft_strlcpy(ptf->spec, "cspdiuxX%", 10);
+	ft_strlcpy(ptf->flag, "-0.*", 5);
+	ptf->ret = 0;
+	ptf->padding = 0;
+	ptf->align = 0;
+	ptf->width = 0;
+	ptf->prec = 0;
+	ptf->pad = '\0';
+	ptf->type = '\0';
 	return (ptf);
 }
 
 int		ft_printf(const char *str, ...)
 {
-	va_list	vl;
-	t_ptf	ptf;
+	t_ptf	*ptf;
 
-	va_start(vl, str);
 	ptf = init_ptf();
+	va_start(ptf->vl, str);
 	while (*str)
 	{
 		if (*str == '%' && *str + 1)
-			ptf.ret += parse_str(vl, ptf, (char*)++str);
+			str = parse_spec(ptf, (char*)++str);
 		else
-			ptf.ret += ft_putchar(*str);
+			ptf->ret += ft_putchar(*str);
 		str++;
 	}
-	va_end(vl);
-	return (ptf.ret);
+	va_end(ptf->vl);
+	return (ptf->ret);
 }

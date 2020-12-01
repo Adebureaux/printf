@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:11:12 by adeburea          #+#    #+#             */
-/*   Updated: 2020/11/29 16:28:33 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/01 22:59:46 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ char	p_hex(int n)
 		return ('a' + n - 10);
 }
 
-int		display_p(void *ptr)
+void	display_p(t_ptf *ptf)
 {
-	int			count;
 	int			i;
 	uintptr_t	p;
 
-	count = 0;
-	p = (uintptr_t)ptr;
-	count += ft_putstr("0x");
+	p = (uintptr_t)va_arg(ptf->vl, void*);
+	ptf->ret += ft_putstr("0x");
 	if (!p)
-		return ((count += ft_putchar('0')));
+	{
+		ptf->ret += ft_putchar('0');
+		return ;
+	}
 	i = (sizeof(p) << 3) - 20;
 	while (i >= 0)
 	{
-		count += ft_putchar(p_hex((p >> i) & 0xf));
+		ptf->ret += ft_putchar(p_hex((p >> i) & 0xf));
 		i -= 4;
 	}
-	return (count);
 }

@@ -6,13 +6,13 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:08:54 by adeburea          #+#    #+#             */
-/*   Updated: 2020/11/29 17:33:07 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/01 22:57:35 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	display_s(t_ptf ptf, char *s)
+void	display_s(t_ptf *ptf)
 {
-	ptf.ret += ft_putstr(s);
+	ptf->ret += ft_putstr(va_arg(ptf->vl, char*));
 }
