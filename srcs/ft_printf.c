@@ -6,13 +6,13 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 17:40:36 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/02 03:56:09 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/03 03:50:29 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void		display_type(t_ptf *ptf)
+void	display_type(t_ptf *ptf)
 {
 	if (ptf->type == 'c')
 		display_c(ptf);
@@ -37,23 +37,28 @@ char	*parse_spec(t_ptf *ptf, char *str)
 	i = 0;
 	if (str[i] == '0')
 		i += int_len((ptf->pad = '0'), 0);
-	if (ft_isdigit(str[i]))
-		i += int_len((ptf->padding = ft_atoi(&str[i])), 1);
 	if (str[i] == '-')
 		i += int_len((ptf->align = 1), 0);
 	if (str[i] == '*')
-		i += int_len((ptf->width = va_arg(ptf->vl, int)), 1);
-	 else if (ft_isdigit(str[i]))
+		i += int_len((ptf->padding = ft_abs(ptf, va_arg(ptf->vl, int))), 0);
+	else if (ft_isdigit(str[i]))
+		i += int_len((ptf->padding = ft_atoi(&str[i])), 1);
+	if (str[i] == '*')
+		i += int_len((ptf->width = ft_abs(ptf, va_arg(ptf->vl, int))), 1);
+	else if (ft_isdigit(str[i]))
 		i += int_len((ptf->width = ft_atoi(&str[i])), 1);
 	if (str[i] == '.')
 	{
 		if (str[++i] == '*')
-			i += int_len((ptf->prec = va_arg(ptf->vl, int)), 1);
+			i += int_len((ptf->prec = ft_abs(ptf, va_arg(ptf->vl, int))), 1);
 		else if (ft_isdigit(str[i]))
 			i += int_len((ptf->prec = ft_atoi(&str[i])), 1);
+		else
+			ptf->prec = 0;
+
 	}
 	ptf->type = str[i];
-	display_ptf(ptf);
+	//display_ptf(ptf);
 	if (!ptf->type || !ft_strchr(ptf->spec, ptf->type))
 		return (NULL);
 	display_type(ptf);
@@ -67,13 +72,12 @@ t_ptf	*init_ptf(void)
 	if (!(ptf = (t_ptf*)malloc(sizeof(t_ptf))))
 		return (NULL);
 	ft_strlcpy(ptf->spec, "cspdiuxX%", 10);
-	ft_strlcpy(ptf->flag, "-0.*", 5);
 	ptf->ret = 0;
 	ptf->padding = 0;
 	ptf->align = 0;
 	ptf->width = 0;
-	ptf->prec = 0;
-	ptf->pad = '\0';
+	ptf->prec = -1;
+	ptf->pad = ' ';
 	ptf->type = '\0';
 	return (ptf);
 }
@@ -81,6 +85,7 @@ t_ptf	*init_ptf(void)
 int		ft_printf(const char *str, ...)
 {
 	t_ptf	*ptf;
+	int		ret;
 
 	if (!(ptf = init_ptf()))
 		return (-1);
@@ -91,11 +96,14 @@ int		ft_printf(const char *str, ...)
 		{
 			if (!(str = parse_spec(ptf, (char*)++str)))
 				return (-1);
+			reinit_ptf(ptf);
 		}
 		else
 			ptf->ret += ft_putchar(*str);
 		str++;
 	}
 	va_end(ptf->vl);
-	return (ptf->ret);
+	ret = ptf->ret;
+	free(ptf);
+	return (ret);
 }

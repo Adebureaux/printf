@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_c.c                                        :+:      :+:    :+:   */
+/*   ft_precision.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 16:07:44 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/03 03:49:26 by adeburea         ###   ########.fr       */
+/*   Created: 2020/12/03 03:44:26 by adeburea          #+#    #+#             */
+/*   Updated: 2020/12/03 03:55:29 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	display_c(t_ptf *ptf)
+int		ft_putstr_prec(t_ptf *ptf, char *str)
 {
-	while (!ptf->align && ptf->padding-- > 1)
-		ptf->ret += ft_putchar(' ');
-	ptf->ret += ft_putchar(va_arg(ptf->vl, int));
-	while (ptf->align && ptf->padding-- > 1)
-		ptf->ret += ft_putchar(' ');
+	int i;
+
+	i = 0;
+	if (ptf->prec == -1)
+		ptf->ret += ft_putstr(str);
+	else
+		while (str[i] && i < ptf->prec)
+			ft_putchar(str[i++]);
+	return (i);
 }

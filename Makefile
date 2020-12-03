@@ -13,7 +13,8 @@ SRCS =			srcs/ft_printf.c \
 				srcs/display_d.c \
 				srcs/display_u.c \
 				srcs/display_x.c \
-				srcs/display_ptf.c
+				srcs/display_ptf.c \
+				srcs/ft_precision.c
 OBJS = 			${SRCS:.c=.o}
 
 .c.o:
@@ -29,7 +30,7 @@ ${LIBFT}:
 all: ${NAME}
 
 out: ${LIBFT}
-	${CC} -g -fsanitize=address ${INC} ${LIBFT} ${CFLAGS} main.c ${SRCS}
+	${CC} -g -fsanitize=address,undefined ${INC} ${LIBFT} ${CFLAGS} main.c ${SRCS}
 	rm -rf a.out.dSYM
 	./a.out
 
