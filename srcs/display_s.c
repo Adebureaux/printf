@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:08:54 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/03 03:49:56 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:34:19 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ void	display_s(t_ptf *ptf)
 
 	str = va_arg(ptf->vl, char*);
 	len = str ? ft_strlen(str) : 6;
+	len = ptf->prec != -1 && str ? ptf->prec : len;
+	if (ptf->prec != -1 &&  ptf->prec < len)
+		len -= ptf->prec;
 	while (!ptf->align && ptf->padding-- > len)
 		ptf->ret += ft_putchar(' ');
 	if (!str)

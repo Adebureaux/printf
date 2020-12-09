@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_precision.c                                     :+:      :+:    :+:   */
+/*   display_ptf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 03:44:26 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/07 06:24:00 by adeburea         ###   ########.fr       */
+/*   Created: 2020/12/01 05:24:11 by adeburea          #+#    #+#             */
+/*   Updated: 2020/12/01 22:56:11 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		ft_putstr_prec(t_ptf *ptf, char *str)
+void	display_ptf(t_ptf *ptf)
 {
-	int i;
-
-	i = 0;
-	if (ptf->prec == -1)
-		ptf->ret += ft_putstr(str);
+	printf("ret = %d\n", ptf->ret);
+	printf("padding = %d\n", ptf->padding);
+	printf("align = %d\n", ptf->align);
+	printf("width = %d\n", ptf->width);
+	printf("prec = %d\n", ptf->prec);
+	if (!ptf->pad)
+		printf("pad = null\n");
 	else
-		while (str[i] && i < ptf->prec)
-			ft_putchar(str[i++]);
-	return (i);
+		printf("pad = %c\n", ptf->pad);
+	if (!ptf->type)
+		printf("type = null\n");
+	else
+		printf("type = %c\n", ptf->type);
 }

@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:14:58 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/01 23:01:38 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/07 06:24:24 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ void	display_u(t_ptf *ptf)
 	unsigned int	n;
 
 	n = va_arg(ptf->vl, unsigned);
-	if (n < 0)
-	{
-		n *= -1;
-		ptf->ret += ft_putchar('-');
-	}
 	size = u_size(n);
 	while (size >= 10)
 	{
