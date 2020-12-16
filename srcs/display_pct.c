@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_s.c                                        :+:      :+:    :+:   */
+/*   display_pct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 16:08:54 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 17:43:20 by adeburea         ###   ########.fr       */
+/*   Created: 2020/12/16 17:28:33 by adeburea          #+#    #+#             */
+/*   Updated: 2020/12/16 20:46:50 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	display_s(t_ptf *ptf)
+void display_pct(t_ptf *ptf)
 {
-	char	*str;
-
-	str = va_arg(ptf->vl, char*);
-	str = str ? str : ptf->nul;
-	ptf->width -= ft_strlen_prec(ptf, str);
-	while (!ptf->align && ptf->width-- > 0)
-		ptf->ret += ft_putchar(' ');
-	ptf->ret += ft_putstr_prec(ptf, str);
-	while (ptf->align && ptf->width-- > 0)
-		ptf->ret += ft_putchar(' ');
+	if (ptf->align)
+		ptf->pad = ' ';
+	while (!ptf->align && ptf->width-- > 1)
+		ptf->ret += ft_putchar(ptf->pad);
+	ptf->ret += ft_putchar('%');
+	while (ptf->align && ptf->width-- > 1)
+		ptf->ret += ft_putchar(ptf->pad);
 }

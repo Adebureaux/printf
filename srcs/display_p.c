@@ -6,36 +6,28 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:11:12 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/01 22:59:46 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/16 21:34:10 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	p_hex(int n)
-{
-	if (n >= 0 && n < 10)
-		return ('0' + n);
-	else
-		return ('a' + n - 10);
-}
-
 void	display_p(t_ptf *ptf)
 {
-	int			i;
-	uintptr_t	p;
+	unsigned long int	p;
 
-	p = (uintptr_t)va_arg(ptf->vl, void*);
+	p = (unsigned long int)va_arg(ptf->vl, void*);
+	recursive_hex_size(ptf, p);
+	ptf->width -= ptf->hex;
+	if (ptf->prec != -1 && !p)
+		ptf->width++;
+	while (!ptf->align && ptf->width-- > 0)
+		ptf->ret += ft_putchar(' ');
 	ptf->ret += ft_putstr("0x");
-	if (!p)
-	{
+	if (ptf->prec == -1 && !p)
 		ptf->ret += ft_putchar('0');
-		return ;
-	}
-	i = (sizeof(p) << 3) - 20;
-	while (i >= 0)
-	{
-		ptf->ret += ft_putchar(p_hex((p >> i) & 0xf));
-		i -= 4;
-	}
+	else if (p)
+		recursive_hex(ptf, p);
+	while (ptf->align && ptf->width-- > 0)
+		ptf->ret += ft_putchar(' ');
 }

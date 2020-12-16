@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 17:40:36 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 16:27:59 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/16 21:32:21 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	display_type(t_ptf *ptf)
 	if (ptf->type == 'u')
 		display_u(ptf);
 	if (ptf->type == 'x' || ptf->type == 'X')
-		display_x(ptf, va_arg(ptf->vl, unsigned));
+		display_x(ptf, va_arg(ptf->vl, unsigned long));
 	if (ptf->type == '%')
-		ptf->ret += ft_putchar('%');
+		display_pct(ptf);
 }
 
 char	*parse_spec(t_ptf *ptf, char *str)
@@ -35,10 +35,10 @@ char	*parse_spec(t_ptf *ptf, char *str)
 	int		i;
 
 	i = 0;
-	if (str[i] == '0')
-		i += int_len((ptf->pad = '0'), 0);
 	if (str[i] == '-')
 		i += int_len((ptf->align = 1), 0);
+	if (str[i] == '0')
+		i += int_len((ptf->pad = '0'), 0);
 	if (str[i] == '*')
 		i += int_len((ptf->width = ft_abs(ptf, va_arg(ptf->vl, int))), 0);
 	else if (ft_isdigit(str[i]))
@@ -62,10 +62,12 @@ t_ptf	*init_ptf(void)
 	ptf->align = 0;
 	ptf->width = 0;
 	ptf->prec = -1;
+	ptf->hex = 2;
 	ptf->pad = ' ';
 	ptf->type = '\0';
 	ft_strlcpy(ptf->nul, "(null)", 7);
 	ft_strlcpy(ptf->spec, "cspdiuxX%", 10);
+	ft_strlcpy(ptf->base, "0123456789abcdef", 17);
 	return (ptf);
 }
 

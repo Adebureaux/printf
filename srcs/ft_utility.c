@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 15:53:40 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 16:04:50 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/16 20:35:18 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	reinit_ptf(t_ptf *ptf)
 	ptf->align = 0;
 	ptf->width = 0;
 	ptf->prec = -1;
+	ptf->hex = 2;
 	ptf->pad = ' ';
 	ptf->type = '\0';
+	ft_strlcpy(ptf->base, "0123456789abcdef", 17);
 }
