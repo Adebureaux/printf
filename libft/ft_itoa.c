@@ -1,49 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utility.c                                       :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 15:53:40 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 16:04:50 by adeburea         ###   ########.fr       */
+/*   Created: 2020/09/28 18:09:45 by adeburea          #+#    #+#             */
+/*   Updated: 2020/11/21 18:35:53 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-int		ft_putchar(int c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int		ft_putstr(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		ft_putchar(str[i++]);
-	return (i);
-}
-
-int		ft_abs(t_ptf *ptf, int n)
-{
-	if (n < 0)
-	{
-		ptf->align = 1;
-		return (-n);
-	}
-	return (n);
-}
-
-int		int_len(int n, int flag)
+static int	ft_itoa_len(int n)
 {
 	int		len;
 
-	if (!flag)
-		return (1);
 	len = 1;
 	n < 0 ? len++ : 0;
 	while ((n /= 10))
@@ -51,11 +23,25 @@ int		int_len(int n, int flag)
 	return (len);
 }
 
-void	reinit_ptf(t_ptf *ptf)
+char		*ft_itoa(int n)
 {
-	ptf->align = 0;
-	ptf->width = 0;
-	ptf->prec = -1;
-	ptf->pad = ' ';
-	ptf->type = '\0';
+	int			len;
+	long int	nb;
+	char		*dst;
+
+	len = ft_itoa_len(n);
+	if (!(dst = malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	dst[len] = '\0';
+	nb = n;
+	if (nb < 0)
+		nb = -nb;
+	while (len--)
+	{
+		dst[len] = (nb % 10) + '0';
+		nb /= 10;
+	}
+	if (n < 0)
+		dst[0] = '-';
+	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 05:24:11 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/01 22:56:11 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/16 16:00:22 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	display_ptf(t_ptf *ptf)
 {
 	printf("ret = %d\n", ptf->ret);
-	printf("padding = %d\n", ptf->padding);
 	printf("align = %d\n", ptf->align);
 	printf("width = %d\n", ptf->width);
 	printf("prec = %d\n", ptf->prec);

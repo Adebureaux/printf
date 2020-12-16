@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_c.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 16:07:44 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 16:00:06 by adeburea         ###   ########.fr       */
+/*   Created: 2020/09/29 16:01:41 by adeburea          #+#    #+#             */
+/*   Updated: 2020/11/17 16:16:36 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	display_c(t_ptf *ptf)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	while (!ptf->align && ptf->width-- > 1)
-		ptf->ret += ft_putchar(' ');
-	ptf->ret += ft_putchar(va_arg(ptf->vl, int));
-	while (ptf->align && ptf->width-- > 1)
-		ptf->ret += ft_putchar(' ');
+	t_list *last;
+
+	if ((*alst))
+	{
+		last = ft_lstlast((*alst));
+		last->next = new;
+		new->next = NULL;
+	}
+	else
+		(*alst) = new;
 }

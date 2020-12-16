@@ -2,7 +2,7 @@
 
 int		main(void)
 {
-	printf("ret = |%d|\n", printf("%7.8s", "yolo"));
-	printf("ret = |%d|\n", ft_printf("%7.8s", "yolo"));
+	printf("ret = |%d| (real)\n", printf("%10.03s", NULL));
+	printf("ret = |%d| (mine)\n", ft_printf("%10.03s", NULL));
 	return (0);
 }

@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_c.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 16:07:44 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 16:00:06 by adeburea         ###   ########.fr       */
+/*   Created: 2020/09/28 00:14:35 by adeburea          #+#    #+#             */
+/*   Updated: 2020/11/10 19:57:53 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	display_c(t_ptf *ptf)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	while (!ptf->align && ptf->width-- > 1)
-		ptf->ret += ft_putchar(' ');
-	ptf->ret += ft_putchar(va_arg(ptf->vl, int));
-	while (ptf->align && ptf->width-- > 1)
-		ptf->ret += ft_putchar(' ');
+	char *dst;
+
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s) < len ? ft_strlen(s) : len;
+	while (start-- && *s)
+		s++;
+	if (!(dst = (char*)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	ft_strlcpy(dst, s, len + 1);
+	return (dst);
 }

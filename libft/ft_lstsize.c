@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_c.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 16:07:44 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 16:00:06 by adeburea         ###   ########.fr       */
+/*   Created: 2020/09/29 14:58:46 by adeburea          #+#    #+#             */
+/*   Updated: 2020/11/13 02:17:40 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	display_c(t_ptf *ptf)
+int		ft_lstsize(t_list *lst)
 {
-	while (!ptf->align && ptf->width-- > 1)
-		ptf->ret += ft_putchar(' ');
-	ptf->ret += ft_putchar(va_arg(ptf->vl, int));
-	while (ptf->align && ptf->width-- > 1)
-		ptf->ret += ft_putchar(' ');
+	int count;
+
+	count = 0;
+	while (lst)
+	{
+		count++;
+		lst = lst->next;
+	}
+	return (count);
 }

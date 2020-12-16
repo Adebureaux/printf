@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 17:40:36 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/11 03:42:01 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/16 16:27:59 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,10 @@ char	*parse_spec(t_ptf *ptf, char *str)
 	if (str[i] == '-')
 		i += int_len((ptf->align = 1), 0);
 	if (str[i] == '*')
-		i += int_len((ptf->padding = ft_abs(ptf, va_arg(ptf->vl, int))), 0);
-	else if (ft_isdigit(str[i]))
-		i += int_len((ptf->padding = ft_atoi(&str[i])), 1);
-	if (str[i] == '*')
-		i += int_len((ptf->width = ft_abs(ptf, va_arg(ptf->vl, int))), 1);
+		i += int_len((ptf->width = ft_abs(ptf, va_arg(ptf->vl, int))), 0);
 	else if (ft_isdigit(str[i]))
 		i += int_len((ptf->width = ft_atoi(&str[i])), 1);
-	if (str[i] == '.')
-	{
-		if (str[++i] == '*')
-			i += int_len((ptf->prec = ft_abs(ptf, va_arg(ptf->vl, int))), 1);
-		else if (ft_isdigit(str[i]))
-			i += int_len((ptf->prec = ft_atoi(&str[i])), 1);
-		else
-			ptf->prec = 0;
-
-	}
+	i = ft_parse_prec(ptf, str, i);
 	ptf->type = str[i];
 	//display_ptf(ptf);
 	if (!ptf->type || !ft_strchr(ptf->spec, ptf->type))
@@ -71,14 +58,14 @@ t_ptf	*init_ptf(void)
 
 	if (!(ptf = (t_ptf*)malloc(sizeof(t_ptf))))
 		return (NULL);
-	ft_strlcpy(ptf->spec, "cspdiuxX%", 10);
 	ptf->ret = 0;
-	ptf->padding = 0;
 	ptf->align = 0;
 	ptf->width = 0;
 	ptf->prec = -1;
 	ptf->pad = ' ';
 	ptf->type = '\0';
+	ft_strlcpy(ptf->nul, "(null)", 7);
+	ft_strlcpy(ptf->spec, "cspdiuxX%", 10);
 	return (ptf);
 }
 

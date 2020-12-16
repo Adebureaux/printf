@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_c.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 16:07:44 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 16:00:06 by adeburea         ###   ########.fr       */
+/*   Created: 2020/09/29 00:09:49 by adeburea          #+#    #+#             */
+/*   Updated: 2020/11/14 14:14:17 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	display_c(t_ptf *ptf)
+void	ft_putnbr_fd(int n, int fd)
 {
-	while (!ptf->align && ptf->width-- > 1)
-		ptf->ret += ft_putchar(' ');
-	ptf->ret += ft_putchar(va_arg(ptf->vl, int));
-	while (ptf->align && ptf->width-- > 1)
-		ptf->ret += ft_putchar(' ');
+	char		c;
+	long int	lgi;
+
+	lgi = n;
+	lgi < 0 ? write(fd, "-", 1) : 0;
+	lgi < 0 ? lgi = -lgi : 0;
+	if (lgi >= 10)
+	{
+		ft_putnbr_fd(lgi / 10, fd);
+		ft_putnbr_fd(lgi % 10, fd);
+	}
+	else
+	{
+		c = lgi + '0';
+		write(fd, &c, 1);
+	}
 }

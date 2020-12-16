@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_c.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 16:07:44 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 16:00:06 by adeburea         ###   ########.fr       */
+/*   Created: 2020/09/28 00:12:21 by adeburea          #+#    #+#             */
+/*   Updated: 2020/09/28 20:44:16 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	display_c(t_ptf *ptf)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	while (!ptf->align && ptf->width-- > 1)
-		ptf->ret += ft_putchar(' ');
-	ptf->ret += ft_putchar(va_arg(ptf->vl, int));
-	while (ptf->align && ptf->width-- > 1)
-		ptf->ret += ft_putchar(' ');
+	unsigned char	*ptr_s;
+	size_t			i;
+
+	ptr_s = (unsigned char*)s;
+	i = -1;
+	while (++i < n)
+	{
+		if (ptr_s[i] == (unsigned char)c)
+			return ((void*)ptr_s + i);
+	}
+	return (NULL);
 }

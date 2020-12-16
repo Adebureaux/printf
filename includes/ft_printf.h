@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:58:26 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/03 03:46:44 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/16 16:19:06 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ typedef struct s_ptf	t_ptf;
 struct			s_ptf
 {
 	int		ret;
-	int		padding;
 	int		align;
 	int		width;
 	int		prec;
 	char	pad;
 	char	type;
+	char	nul[7];
 	char	spec[10];
 	va_list	vl;
 };
@@ -37,6 +37,8 @@ int				ft_putstr(char *str);
 int				int_len(int n, int flag);
 int				ft_abs(t_ptf *ptf, int n);
 int				ft_putstr_prec(t_ptf *ptf, char *str);
+int				ft_strlen_prec(t_ptf *ptf, char *str);
+int				ft_parse_prec(t_ptf *ptf, char *str, int i);
 void			reinit_ptf(t_ptf *ptf);
 void			display_c(t_ptf *ptf);
 void			display_s(t_ptf *ptf);
