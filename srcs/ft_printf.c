@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 17:40:36 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 21:32:21 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/17 22:09:49 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ char	*parse_spec(t_ptf *ptf, char *str)
 	int		i;
 
 	i = 0;
-	if (str[i] == '-')
-		i += int_len((ptf->align = 1), 0);
-	if (str[i] == '0')
-		i += int_len((ptf->pad = '0'), 0);
+	str[i] == '0' ? i += int_len((ptf->pad = '0'), 0) : 0;
+	str[i] == '-' ? i += int_len((ptf->align = 1), 0) : 0;
+	str[i] == '0' ? i += int_len((ptf->pad = '0'), 0) : 0;
 	if (str[i] == '*')
 		i += int_len((ptf->width = ft_abs(ptf, va_arg(ptf->vl, int))), 0);
 	else if (ft_isdigit(str[i]))
 		i += int_len((ptf->width = ft_atoi(&str[i])), 1);
 	i = ft_parse_prec(ptf, str, i);
 	ptf->type = str[i];
+	//ici
 	//display_ptf(ptf);
 	if (!ptf->type || !ft_strchr(ptf->spec, ptf->type))
 		return (NULL);
