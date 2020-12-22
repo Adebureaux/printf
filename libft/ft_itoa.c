@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:09:45 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/22 23:38:54 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/22 23:49:52 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ft_itoa_len(long long int n)
 	return (len);
 }
 
-char		*ft_itoa(long long int n)
+char		*ft_itoa(long long n)
 {
 	int			len;
 	long int	nb;

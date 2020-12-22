@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 15:53:40 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/22 23:44:39 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/22 23:49:26 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		ft_abs(t_ptf *ptf, int n)
 	return (n);
 }
 
-int		int_len(long long int n, int flag)
+int		int_len(long long n, int flag)
 {
 	int		len;
 
