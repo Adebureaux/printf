@@ -81,7 +81,19 @@ int		main(void)
 	printf("ret = |%d| (real)\n", printf("%d", 0));
 	printf("ret = |%d| (mine)\n", ft_printf("%d", 0));
 
-	printf("ret = |%d| (real)\n", printf("%.8d", 0));
-	printf("ret = |%d| (mine)\n", ft_printf("%.8d", 0));
+	printf("ret = |%d| (real)\n", printf("%.*s", -3, "hello"));
+	printf("ret = |%d| (mine)\n", ft_printf("%.*s", -3, "hello"));
+
+	printf("ret = |%d| (real)\n", printf("%-*.*s", -7, -3, "yolo"));
+	printf("ret = |%d| (mine)\n", ft_printf("%-*.*s", -7, -3, "yolo"));
+
+	printf("ret = |%d| (real)\n", printf("%-*.*s", 7, -3, "yolo"));
+	printf("ret = |%d| (mine)\n", ft_printf("%-*.*s", 7, -3, "yolo"));
+
+	printf("ret = |%d| (real)\n", printf("%-*.*s", 7, 3, "yolo"));
+	printf("ret = |%d| (mine)\n", ft_printf("%-*.*s", 7, 3, "yolo"));
+
+	printf("ret = |%d| (real)\n", printf("%u", 4294967295u));
+	printf("ret = |%d| (mine)\n", ft_printf("%u", 4294967295u));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:58:26 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 19:03:48 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/22 23:43:24 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ struct			s_ptf
 int				ft_printf(const char *str, ...);
 int				ft_putchar(int c);
 int				ft_putstr(char *str);
-int				int_len(int n, int flag);
+int				int_len(long long n, int flag);
 int				ft_abs(t_ptf *ptf, int n);
 int				ft_putstr_prec(t_ptf *ptf, char *str);
 int				ft_strlen_prec(t_ptf *ptf, char *str);

@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 03:44:26 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 16:29:28 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/22 23:26:27 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_putstr_prec(t_ptf *ptf, char *str)
 	int i;
 
 	i = 0;
-	if (ptf->prec == -1)
+	if (ptf->prec < 0)
 		ptf->ret += ft_putstr(str);
 	else
 		while (str[i] && i < ptf->prec)
@@ -30,7 +30,7 @@ int		ft_strlen_prec(t_ptf *ptf, char *str)
 	int i;
 
 	i = 0;
-	if (ptf->prec == -1)
+	if (ptf->prec < 0)
 		return (ft_strlen(str));
 	while (str[i] && i < ptf->prec)
 		i++;
@@ -42,7 +42,7 @@ int		ft_parse_prec(t_ptf *ptf, char *str, int i)
 	if (str[i] == '.')
 	{
 		if (str[++i] == '*')
-			i += int_len((ptf->prec = ft_abs(ptf, va_arg(ptf->vl, int))), 0);
+			i += int_len((ptf->prec = va_arg(ptf->vl, int)), 0);
 		else if (ft_isdigit(str[i]))
 		{
 			if (str[i] == '0')
