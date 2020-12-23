@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:12:29 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/23 15:02:21 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/23 15:40:42 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	display_x(t_ptf *ptf, unsigned long int n)
 
 	if (ptf->type == 'X')
 		ft_strlcpy(ptf->base, "0123456789ABCDEF", 17);
-	if (!ptf->align && !ptf->width && !ptf->prec)
+	if (!ptf->align && !ptf->width && !ptf->prec && !n)
 		return ;
 	prec = ptf->prec;
 	ptf->prec -= hex_len(n);
