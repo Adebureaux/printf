@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:10:17 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/23 11:24:37 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/23 15:35:44 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	display_d(t_ptf *ptf)
 	int		prec;
 	char	*str;
 
-	if (!ptf->align && !ptf->width && !ptf->prec)
-		return ;
 	n = va_arg(ptf->vl, int);
+	if (!ptf->align && !ptf->width && !ptf->prec && !n)
+		return ;
 	prec = ptf->prec;
 	ptf->prec -= int_len(n, 1);
 	ptf->width -= ptf->prec > 0 ? prec : int_len(n, 1);
