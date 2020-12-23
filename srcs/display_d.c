@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:10:17 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/22 21:44:20 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/23 11:24:37 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,8 @@ void	ft_putnbr_prec(t_ptf *ptf, char *str)
 	}
 }
 
-void	display_d(t_ptf *ptf)
+void	display_d_after(t_ptf *ptf, char *str, int prec, int n)
 {
-	int		n;
-	int		prec;
-	char	*str;
-
-	if (!ptf->align && !ptf->width && !ptf->prec)
-		return ;
-	n = va_arg(ptf->vl, int);
-	prec = ptf->prec;
-	ptf->prec -= int_len(n, 1);
-	ptf->width -= ptf->prec > 0 ? prec : int_len(n, 1);
-	if (!(str = ft_itoa(n)))
-		return ;
-	if ((ptf->align) || (ptf->pad == '0' && ptf->width > 0 && prec > 0) || (!n && !prec))
-		ptf->pad = ' ';
-	if (n < 0 && ptf->prec > 0)
-	{
-		ptf->prec++;
-		ptf->width--;
-	}
 	if (n < 0 && ptf->width > 0
 		&& (ptf->pad == '0' || ptf->align) && ptf->prec < 0)
 	{
@@ -65,4 +46,29 @@ void	display_d(t_ptf *ptf)
 	while (ptf->align && ptf->width-- > 0)
 		ptf->ret += ft_putchar(ptf->pad);
 	free(str);
+}
+
+void	display_d(t_ptf *ptf)
+{
+	int		n;
+	int		prec;
+	char	*str;
+
+	if (!ptf->align && !ptf->width && !ptf->prec)
+		return ;
+	n = va_arg(ptf->vl, int);
+	prec = ptf->prec;
+	ptf->prec -= int_len(n, 1);
+	ptf->width -= ptf->prec > 0 ? prec : int_len(n, 1);
+	if (!(str = ft_itoa(n)))
+		return ;
+	if ((ptf->align) || (ptf->pad == '0' && ptf->width > 0 && prec > 0)
+		|| (!n && !prec))
+		ptf->pad = ' ';
+	if (n < 0 && ptf->prec > 0)
+	{
+		ptf->prec++;
+		ptf->width--;
+	}
+	display_d_after(ptf, str, prec, n);
 }

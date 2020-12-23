@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:58:26 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/22 23:43:24 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/23 11:28:25 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int				ft_putstr_prec(t_ptf *ptf, char *str);
 int				ft_strlen_prec(t_ptf *ptf, char *str);
 int				ft_parse_prec(t_ptf *ptf, char *str, int i);
 void			reinit_ptf(t_ptf *ptf);
-void 			display_pct(t_ptf *ptf);
+void			display_pct(t_ptf *ptf);
 void			display_c(t_ptf *ptf);
 void			display_s(t_ptf *ptf);
 void			display_p(t_ptf *ptf);

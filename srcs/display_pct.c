@@ -6,13 +6,13 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 17:28:33 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/16 20:46:50 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/23 11:27:29 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void display_pct(t_ptf *ptf)
+void	display_pct(t_ptf *ptf)
 {
 	if (ptf->align)
 		ptf->pad = ' ';
