@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:14:58 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/23 11:27:47 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/23 13:11:45 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,10 @@ void	ft_putnbr_prec_u(t_ptf *ptf, char *str)
 	}
 }
 
-void	display_u_after(t_ptf *ptf, char *str, int prec, int n)
+void	display_u_after(t_ptf *ptf, char *str, int n, int prec)
 {
-	if (n < 0 && ptf->width > 0
-		&& (ptf->pad == '0' || ptf->align) && ptf->prec < 0)
-	{
-		ptf->ret += ft_putchar('-');
-		ft_memmove(str, str + 1, ft_strlen(str));
-	}
 	while (!ptf->align && ptf->width-- > 0)
 		ptf->ret += ft_putchar(ptf->pad);
-	if (n < 0 && ptf->prec > 0)
-	{
-		ptf->ret += ft_putchar('-');
-		ft_memmove(str, str + 1, ft_strlen(str));
-	}
 	if (!n && !prec)
 		ptf->ret += ft_putchar(' ');
 	else
@@ -65,10 +54,5 @@ void	display_u(t_ptf *ptf)
 	if ((ptf->align) || (ptf->pad == '0' && ptf->width > 0 && prec > 0)
 		|| (!n && !prec))
 		ptf->pad = ' ';
-	if (n < 0 && ptf->prec > 0)
-	{
-		ptf->prec++;
-		ptf->width--;
-	}
-	display_u_after(ptf, str, prec, n);
+	display_u_after(ptf, str, n, prec);
 }

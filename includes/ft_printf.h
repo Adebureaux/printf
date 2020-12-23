@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:58:26 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/23 11:28:25 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/23 13:09:23 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void			display_s(t_ptf *ptf);
 void			display_p(t_ptf *ptf);
 void			display_d(t_ptf *ptf);
 void			display_u(t_ptf *ptf);
-void			display_x(t_ptf *ptf, unsigned long int nb);
-void			recursive_hex(t_ptf *ptf, unsigned long int nb);
-void			recursive_hex_size(t_ptf *ptf, unsigned long int nb);
+void			display_x(t_ptf *ptf, unsigned long int n);
+void			hex(t_ptf *ptf, unsigned long int nb);
+void			hex_size(t_ptf *ptf, unsigned long int nb);
 void			display_ptf(t_ptf *ptf);
 
 #endif

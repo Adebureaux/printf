@@ -93,7 +93,10 @@ int		main(void)
 	printf("ret = |%d| (real)\n", printf("%-*.*s", 7, 3, "yolo"));
 	printf("ret = |%d| (mine)\n", ft_printf("%-*.*s", 7, 3, "yolo"));
 
-	printf("ret = |%d| (real)\n", printf("%u", 4294967295u));
-	printf("ret = |%d| (mine)\n", ft_printf("%u", 4294967295u));
+	printf("ret = |%d| (real)\n", printf("%.5x", 21));
+	printf("ret = |%d| (mine)\n", ft_printf("%.5x", 21));
+
+	printf("ret = |%d| (real)\n", printf("%.5x", 564568465));
+	printf("ret = |%d| (mine)\n", ft_printf("%.5x", 564568465));
 	return (0);
 }
