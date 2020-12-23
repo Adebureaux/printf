@@ -2,8 +2,7 @@
 
 CC = gcc
 NAME = libftprintf.a
-#REMMETTRE LE FLAG !!!
-CFLAGS = -Wall -Wextra #-Werror
+CFLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 INC = -I./includes
 SRCS =			srcs/ft_printf.c \

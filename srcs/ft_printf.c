@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 17:40:36 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/23 11:57:27 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/23 15:03:57 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ char	*parse_spec(t_ptf *ptf, char *str)
 		i += int_len((ptf->width = ft_atoi(&str[i])), 1);
 	i = ft_parse_prec(ptf, str, i);
 	ptf->type = str[i];
-	//ici
-	//display_ptf(ptf);
 	if (!ptf->type || !ft_strchr(ptf->spec, ptf->type))
 		return (NULL);
 	display_type(ptf);
