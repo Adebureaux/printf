@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:14:58 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/23 15:40:25 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/25 15:57:05 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_putnbr_prec_u(t_ptf *ptf, char *str)
 	}
 }
 
-void	display_u_after(t_ptf *ptf, char *str, int n, int prec)
+void	display_u_after(t_ptf *ptf, char *str, unsigned int n, int prec)
 {
 	while (!ptf->align && ptf->width-- > 0)
 		ptf->ret += ft_putchar(ptf->pad);
@@ -33,17 +33,17 @@ void	display_u_after(t_ptf *ptf, char *str, int n, int prec)
 	else
 		ft_putnbr_prec_u(ptf, str);
 	while (ptf->align && ptf->width-- > 0)
-		ptf->ret += ft_putchar(ptf->pad);
+		ptf->ret += ft_putchar(' ');
 	free(str);
 }
 
 void	display_u(t_ptf *ptf)
 {
-	unsigned long int	n;
+	unsigned int		n;
 	int					prec;
 	char				*str;
 
-	n = va_arg(ptf->vl, unsigned long);
+	n = va_arg(ptf->vl, unsigned);
 	if (!ptf->align && !ptf->width && !ptf->prec && !n)
 		return ;
 	prec = ptf->prec;
@@ -51,8 +51,7 @@ void	display_u(t_ptf *ptf)
 	ptf->width -= ptf->prec > 0 ? prec : int_len(n, 1);
 	if (!(str = ft_itoa(n)))
 		return ;
-	if ((ptf->align) || (ptf->pad == '0' && ptf->width > 0 && prec > 0)
-		|| (!n && !prec))
+	if ((ptf->align) || (ptf->pad == '0' && prec >= 0) || (!n && !prec))
 		ptf->pad = ' ';
 	display_u_after(ptf, str, n, prec);
 }

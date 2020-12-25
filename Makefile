@@ -1,4 +1,4 @@
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
 
 CC = gcc
 NAME = libftprintf.a
@@ -30,11 +30,6 @@ ${LIBFT}:
 	@make all -C libft
 
 all: ${NAME}
-
-out: ${LIBFT}
-	${CC} -g -fsanitize=address,undefined ${INC} ${LIBFT} ${CFLAGS} main.c ${SRCS}
-	rm -rf a.out.dSYM
-	./a.out
 
 clean:
 	rm -f ${OBJS}

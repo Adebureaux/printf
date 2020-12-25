@@ -6,13 +6,13 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:12:29 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/23 15:40:42 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/25 15:58:17 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		hex_len(unsigned long int nb)
+int		hex_len(unsigned int nb)
 {
 	int		i;
 
@@ -22,7 +22,7 @@ int		hex_len(unsigned long int nb)
 	return (i);
 }
 
-void	*ft_itoa_hex(t_ptf *ptf, unsigned long int nb)
+void	*ft_itoa_hex(t_ptf *ptf, unsigned int nb)
 {
 	char		*str;
 	int			len;
@@ -51,7 +51,7 @@ void	ft_puthex_prec(t_ptf *ptf, char *str)
 	}
 }
 
-void	display_x_after(t_ptf *ptf, char *str, int prec, int n)
+void	display_x_after(t_ptf *ptf, char *str, int prec, unsigned int n)
 {
 	while (!ptf->align && ptf->width-- > 0)
 		ptf->ret += ft_putchar(ptf->pad);
@@ -78,7 +78,7 @@ void	display_x(t_ptf *ptf, unsigned long int n)
 	ptf->width -= ptf->prec > 0 ? prec : hex_len(n);
 	if (!(str = ft_itoa_hex(ptf, n)))
 		return ;
-	if ((ptf->align) || (ptf->pad == '0' && ptf->width > 0 && prec > 0)
+	if ((ptf->align) || (ptf->pad == '0' && ptf->width > 0 && prec >= 0)
 		|| (!n && !prec))
 		ptf->pad = ' ';
 	display_x_after(ptf, str, prec, n);

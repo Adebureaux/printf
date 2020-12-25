@@ -6,18 +6,20 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 16:10:17 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/23 15:46:32 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/25 15:58:03 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	ft_putnbr_prec(t_ptf *ptf, char *str)
+void	ft_putnbr_prec(t_ptf *ptf, char *str, int n)
 {
 	if (ptf->prec < 0)
 		ptf->ret += ft_putstr(str);
 	else
 	{
+		if (n < 0 && ptf->prec == 0)
+			ptf->ret += ft_putchar('0');
 		while (ptf->prec-- > 0)
 			ptf->ret += ft_putchar('0');
 		ptf->ret += ft_putstr(str);
@@ -27,14 +29,14 @@ void	ft_putnbr_prec(t_ptf *ptf, char *str)
 void	display_d_after(t_ptf *ptf, char *str, int prec, int n)
 {
 	if (n < 0 && ptf->width > 0
-		&& (ptf->pad == '0' || ptf->align) && ptf->prec < 0)
+		&& (ptf->pad == '0' || ptf->align) && ptf->prec <= 0)
 	{
 		ptf->ret += ft_putchar('-');
 		ft_memmove(str, str + 1, ft_strlen(str));
 	}
 	while (!ptf->align && ptf->width-- > 0)
 		ptf->ret += ft_putchar(ptf->pad);
-	if (n < 0 && ptf->prec > 0)
+	if (n < 0 && ptf->prec >= 0)
 	{
 		ptf->ret += ft_putchar('-');
 		ft_memmove(str, str + 1, ft_strlen(str));
@@ -42,7 +44,7 @@ void	display_d_after(t_ptf *ptf, char *str, int prec, int n)
 	if (!n && !prec)
 		ptf->ret += ft_putchar(' ');
 	else
-		ft_putnbr_prec(ptf, str);
+		ft_putnbr_prec(ptf, str, n);
 	while (ptf->align && ptf->width-- > 0)
 		ptf->ret += ft_putchar(ptf->pad);
 	free(str);
@@ -62,10 +64,10 @@ void	display_d(t_ptf *ptf)
 	ptf->width -= ptf->prec > 0 ? prec : int_len(n, 1);
 	if (!(str = ft_itoa(n)))
 		return ;
-	if ((ptf->align) || (ptf->pad == '0' && ptf->width > 0 && prec > 0)
+	if ((ptf->align) || (ptf->pad == '0' && ptf->width > 0 && prec >= 0)
 		|| (!n && !prec))
 		ptf->pad = ' ';
-	if (n < 0 && ptf->prec > 0)
+	if (n < 0 && ptf->prec >= 0)
 	{
 		ptf->prec++;
 		ptf->width--;
