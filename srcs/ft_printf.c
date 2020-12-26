@@ -6,7 +6,7 @@
 /*   By: adeburea <adeburea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 17:40:36 by adeburea          #+#    #+#             */
-/*   Updated: 2020/12/23 15:35:09 by adeburea         ###   ########.fr       */
+/*   Updated: 2020/12/26 14:12:51 by adeburea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ char	*parse_spec(t_ptf *ptf, char *str)
 	int		i;
 
 	i = 0;
-	while (str[i] == '-' || str[i] == '0')
+	while (str[i] == '-' || str[i] == '0' || str[i] == ' ')
 	{
 		str[i] == '-' ? i += int_len((ptf->align = 1), 0) : 0;
 		str[i] == '0' ? i += int_len((ptf->pad = '0'), 0) : 0;
+		str[i] == ' ' ? i++ : 0;
 	}
 	if (str[i] == '*')
 		i += int_len((ptf->width = ft_abs(ptf, va_arg(ptf->vl, int))), 0);
