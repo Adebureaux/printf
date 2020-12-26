@@ -38,6 +38,5 @@ fclean: clean
 	@make clean -C libft
 	rm -f ${NAME}
 	rm -f ${LIBFT}
-	rm -f a.out
 
 re: fclean all
