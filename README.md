@@ -4,7 +4,7 @@ This project is pretty straightforward, it's a lite handmade version of the famo
 
 ## Usage
 
-```make``` to compile 
+```make``` to compile the library.
 
 ## Result
 
