@@ -1,6 +1,6 @@
 # printf
 
-This project is pretty straightforward, I have to recode printf. It aims to learn what is and how to implement variadic functions.
+This project is pretty straightforward, it's a lite handmade version of the famous printf function. It aims to learn what is and how to implement variadic functions.
 
 ## Usage
 
